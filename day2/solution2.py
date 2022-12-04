@@ -1,18 +1,26 @@
+"""
+Day 2 puzzle 1
+"""
+
 import itertools
 
+
 def predict_move(play):
-    # X means you need to lose, 
-    # Y means you need to end the round in a draw, 
+    """
+    A function to predicto player 2 move from player 1 and requested outcome.
+    """
+    # X means you need to lose,
+    # Y means you need to end the round in a draw,
     # and Z means you need to win
     move = None
-    
+
     # p2 loses
     if play[1] == "X":
-        # p1 plays rock 
+        # p1 plays rock
         if play[0] == "A":
             # p2 plays scissor -> p2 loses
             move = "Z"
-        # p1 plays paper 
+        # p1 plays paper
         elif play[0] == "B":
             # p2 plays rock -> p2 loses
             move = "X"
@@ -20,13 +28,13 @@ def predict_move(play):
         elif play[0] == "C":
             # p2 plays paper -> p2 loses
             move = "Y"
-    
+
     # tie
     elif play[1] == "Y":
         # p1 plays rock
         if play[0] == "A":
             # p2 plays rock
-            move = "X"        
+            move = "X"
         # p1 plays paper
         elif play[0] == "B":
             # p2 plays paper
@@ -42,12 +50,12 @@ def predict_move(play):
         if play[0] == "A":
             # p2 plays paper -> p2 wins
             move = "Y"
-        
+
         # p1 plays paper
         elif play[0] == "B":
             # p2 plays scissors -> p2 wins
             move = "Z"
-        
+
         # p1 plays scissors
         elif play[0] == "C":
             # p2 plays rock -> p2 wins
@@ -57,6 +65,9 @@ def predict_move(play):
 
 
 def main(path: str) -> int:
+    """
+    Solution to day 2 puzzle 2
+    """
 
     # A for Rock, B for Paper, and C for Scissors
     p1_possible_outcomes = ["A", "B", "C"]
@@ -75,27 +86,29 @@ def main(path: str) -> int:
     }
 
     who_wins = {}
-    for outcome in itertools.product(*[p1_possible_outcomes, p2_possible_outcomes ]):
+    for outcome in itertools.product(*[
+        p1_possible_outcomes, p2_possible_outcomes
+    ]):
         outcome = "".join(outcome)
 
         # p1 plays rock
         if outcome[0] == "A":
-            
+
             # p2 plays rock
             if outcome[1] == "X":
                 # rock vs rock
                 who_wins[outcome] = "tie"
-            
+
             # p2 plays paper
             elif outcome[1] == "Y":
                 # rock vs paper -> paper wins
                 who_wins[outcome] = "p2"
-            
+
             # p2 plays scissors
             elif outcome[1] == "Z":
                 # rock vs scissors -> rock wins
                 who_wins[outcome] = "p1"
-        
+
         # p1 plays paper
         elif outcome[0] == "B":
 
@@ -103,12 +116,12 @@ def main(path: str) -> int:
             if outcome[1] == "X":
                 # paper vs rock -> paper
                 who_wins[outcome] = "p1"
-            
+
             # p2 plays paper
             elif outcome[1] == "Y":
                 # paper vs paper -> tie
                 who_wins[outcome] = "tie"
-            
+
             # p2 plays scissors
             elif outcome[1] == "Z":
                 # paper vs scissors -> scissors wins
@@ -121,53 +134,54 @@ def main(path: str) -> int:
             if outcome[1] == "X":
                 # scissors vs rock -> rock
                 who_wins[outcome] = "p2"
-            
+
             # p2 plays paper
             elif outcome[1] == "Y":
                 # scissors vs paper -> scissors
                 who_wins[outcome] = "p1"
-            
+
             # p2 plays scissors
             elif outcome[1] == "Z":
                 # scissors vs scissors -> scissors wins
                 who_wins[outcome] = "tie"
-            
-
-
 
     # 0 if you lost, 3 if the round was a draw, and 6 if you won
-    tie = 3 
+    tie = 3
     win = 6
 
-    p1_score = 0    
+    p1_score = 0
     p2_score = 0
-    with open(path) as fin:
+    with open(path, encoding="utf-8") as fin:
         for i, line in enumerate(fin):
             play = line.strip().split(" ")
             play = "".join(play)
-            
+
             p1_score += scores[play[0]]
 
             p2_move = predict_move(play)
 
             p2_score += scores[p2_move]
 
-            winner = who_wins[play[0]+p2_move]
+            winner = who_wins[play[0] + p2_move]
 
-            if winner == "p1":            
+            if winner == "p1":
                 p1_score += win
             elif winner == "p2":
                 p2_score += win
             elif winner == "tie":
                 p1_score += tie
                 p2_score += tie
-            
-            print(f"Round {i+1}: {play} - {p2_move} - {winner} match - p1={p1_score} - p2={p2_score}")
-        
+
+            print(
+                f"Round {i+1}: {play} - {p2_move} - {winner} -" +
+                f" p1={p1_score} - p2={p2_score}"
+            )
 
     print(p2_score)
     return p2_score
 
+
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])
