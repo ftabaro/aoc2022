@@ -1,13 +1,20 @@
-with open("input.txt") as fin:
+def main(path: str) -> int:
     calories = []
     cal = 0
-    for line in fin:
-        line = line.strip()
-        if line == "":
-            calories.append(cal)
-            cal = 0
-            continue
-        cal += int(line)
+    with open(path) as fin:
+        for line in fin:
+            line = line.strip()
+            print(line)
+            if line == "":
+                calories.append(cal)
+                cal = 0
+                continue
+            cal += int(line)
+    
+    calories = sorted(calories, reverse=True)
+    res = sum(calories[:3])
+    return res
 
-calories = sorted(calories, reverse=True)
-print(sum(calories[:3]))
+if __name__ == "__main__":
+    import sys
+    main(sys.argv[1])
