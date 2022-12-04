@@ -1,3 +1,6 @@
+def get_interval(start: int, end: int) -> set:
+    return set(range(start, end + 1))
+
 
 def main(path):
     counter = 0
@@ -5,18 +8,13 @@ def main(path):
         for line in fin:
             line = line.strip().split(",")
 
-            elve1_start, elve1_end = [int(x) for x in line[0].split("-")]
-            elve2_start, elve2_end = [int(x) for x in line[1].split("-")]
+            elve1 = get_interval(*map(int, line[0].split("-")))
+            elve2 = get_interval(*map(int, line[1].split("-")))
 
-            fully_contained = (
-                (
-                    elve2_start >= elve1_start and elve2_end <= elve1_end
-                ) or (
-                    elve1_start >= elve2_start and elve1_end <= elve2_end
-                )
-            )
+            diff1 = elve1.difference(elve2)
+            diff2 = elve2.difference(elve1)
 
-            if fully_contained:
+            if not diff1 or not diff2:
                 counter += 1
                 print(line)
             
