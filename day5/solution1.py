@@ -4,9 +4,10 @@ Day 5 puzzle 1
 
 import re
 import math
+from typing import List
 
 
-def parse_stack_config(stack_config: list[str]) -> list[list[str]]:
+def parse_stack_config(stack_config: List[str]) -> List[List[str]]:
     """
     A function to read the initial stack configuration and parse it into
     a StackConfig object.
@@ -38,8 +39,8 @@ def parse_stack_config(stack_config: list[str]) -> list[list[str]]:
 
 
 def move_stacks(
-    stack_config: list[list[str]], moves: list[str]
-) -> list[list[str]]:
+    stack_config: List[List[str]], moves: List[str]
+) -> List[List[str]]:
     """
     A function to compute the stack configuration after all the moves requested
     """
