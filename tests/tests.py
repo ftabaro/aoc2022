@@ -22,6 +22,9 @@ from day3.solution2 import main as d3s2
 from day4.solution1 import main as d4s1
 from day4.solution2 import main as d4s2
 
+from day5.solution1 import main as d5s1
+from day5.solution2 import main as d5s2
+
 
 # Define paths to test data
 fp = pathlib.Path(__file__).resolve()
@@ -89,3 +92,18 @@ def test_day4_sol1():
 def test_day4_sol2():
     solution = d4s2(test_files["day4"])
     assert solution == 4
+
+
+#########
+# DAY 5 #
+#########
+
+
+def test_day5_sol1():
+    solution = d5s1(test_files["day5"])
+    assert solution == "CMZ"
+
+
+def test_day5_sol2():
+    solution = d5s2(test_files["day5"])
+    assert solution == "MCD"
