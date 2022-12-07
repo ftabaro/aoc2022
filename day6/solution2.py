@@ -19,8 +19,7 @@ def main(path: str) -> List:
         for i in range(siglen-packet_size):
             msg = signal[i:i+packet_size]
             letters = set(list(msg))
-            counts = [msg.count(letter) for letter in letters]
-            if all(map(lambda x: x == 1, counts)):
+            if len(letters) == packet_size:
                 res.append(i+packet_size)
                 break
     print(res)

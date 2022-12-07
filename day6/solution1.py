@@ -13,14 +13,14 @@ def main(path: str) -> List:
         signals = [line.strip() for line in fin.readlines()]
 
     res = []
+    packet_size = 4
     for signal in signals:
         siglen = len(signal)
-        for i in range(siglen-4):
-            msg = signal[i:i+4]
-            letters = set(list(msg))            
-            counts = [msg.count(letter) for letter in letters]
-            if all(map(lambda x: x == 1, counts)):
-                res.append(i+4)
+        for i in range(siglen-packet_size):
+            msg = signal[i:i+packet_size]
+            letters = set(list(msg))
+            if len(letters) == packet_size:
+                res.append(i+packet_size)
                 break
     print(res)
     return res
