@@ -31,6 +31,9 @@ from day6.solution2 import main as d6s2
 from day7.solution1 import main as d7s1
 from day7.solution2 import main as d7s2
 
+from day8.solution1 import main as d8s1
+from day8.solution2 import main as d8s2
+
 
 # Define paths to test data
 fp = pathlib.Path(__file__).resolve()
@@ -143,3 +146,20 @@ def test_day7_sol1():
 def test_day7_sol2():
     solution = d7s2(test_files["day7"])
     assert solution == 24933642
+
+#########
+# DAY 8 #
+#########
+
+
+def test_day8_sol1():
+    solution = d8s1(test_files["day8"])
+    assert solution == 21
+
+
+def test_day8_sol2():
+    solution = d8s2(test_files["day8"], 1, 2)
+    assert solution == 4
+
+    solution = d8s2(test_files["day8"], 3, 2)
+    assert solution == 8
