@@ -20,7 +20,7 @@ def main(path: str) -> int:
             first_compartment = rucksack[: int(nitems / 2)]
             first_compartment = set(first_compartment)
 
-            second_compartment = rucksack[int(nitems / 2):]
+            second_compartment = rucksack[int(nitems / 2) :]
             second_compartment = set(second_compartment)
 
             intersection = first_compartment.intersection(second_compartment)

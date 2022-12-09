@@ -11,12 +11,13 @@ class Node:
     """
     A class to represent file system items
     """
+
     def __init__(
         self,
         node_name: str,
         node_type: str,
         node_parent: Optional[Node] = None,  # the root node has no parent!
-        node_size: int = 0  # folders do not have size
+        node_size: int = 0,  # folders do not have size
     ) -> None:
         self.name = node_name
         self.type = node_type
@@ -26,10 +27,10 @@ class Node:
 
     def __repr__(self):
         representation = (
-            f'Node(name={self.name}, '
-            + f'type={self.type}, '
-            + f'size={self.size}, '
-            + f'parent={self.parent})'
+            f"Node(name={self.name}, "
+            + f"type={self.type}, "
+            + f"size={self.size}, "
+            + f"parent={self.parent})"
         )
         return representation
 
@@ -42,15 +43,15 @@ class Node:
         return "".join(list(reversed(parents)))
 
 
-def parse_script(script: List[str]) -> dict[str: Node]:
+def parse_script(script: List[str]) -> dict[str:Node]:
     """
-    A function to parse the input script. It detect cd and ls commands and 
+    A function to parse the input script. It detect cd and ls commands and
     builds the data structure.
     """
 
     i: int = 0
-    wd: Node  = None
-    nodes: dict[str: Node] = {}
+    wd: Node = None
+    nodes: dict[str:Node] = {}
     while i < len(script):
         line = script[i]
 
@@ -90,7 +91,7 @@ def parse_script(script: List[str]) -> dict[str: Node]:
     return nodes
 
 
-def get_root_size(nodes: dict[str: Node]) -> int:
+def get_root_size(nodes: dict[str:Node]) -> int:
     root_node = nodes["/"]
     root_size = root_node.size
     return root_size
@@ -104,7 +105,7 @@ def main(path: str) -> int:
     with open(path, encoding="utf-8") as fin:
         script = [line.strip() for line in fin]
 
-    nodes: dict[str: Node] = parse_script(script)
+    nodes: dict[str:Node] = parse_script(script)
 
     for node in filter(lambda node: node.type == "file", nodes.values()):
         parent = node.parent
@@ -128,17 +129,16 @@ def main(path: str) -> int:
 
     free_space = total_space - root_size
     required_space = update_size - free_space
-    
+
     res, _ = min(
         filter(
             lambda item: item[1] > 0,
             map(
                 lambda node: (node.size, node.size - required_space),
-                filter(
-                    lambda node: node.type == "dir",
-                    nodes.values()
-                    ))),
-        key=lambda item: item[1]
+                filter(lambda node: node.type == "dir", nodes.values()),
+            ),
+        ),
+        key=lambda item: item[1],
     )
 
     print(res)
@@ -147,4 +147,5 @@ def main(path: str) -> int:
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])

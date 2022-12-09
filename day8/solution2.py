@@ -10,24 +10,16 @@ class Tree:
     """
     A class to represent a tree and its neigbours
     """
-    def __init__(
-        self,
-        tree: int,
-        position: tuple[int, int]
-    ):
+
+    def __init__(self, tree: int, position: tuple[int, int]):
 
         self.tree = tree
         self.position = position
-        self.neighbours = {
-            "top": None,
-            "bottom": None,
-            "left": None,
-            "right": None
-        }
+        self.neighbours = {"top": None, "bottom": None, "left": None, "right": None}
         self.visibility_score = 1
 
     def __repr__(self) -> str:
-        repr = f'Tree({self.tree=}, {self.position=}'
+        repr = f"Tree({self.tree=}, {self.position=}"
         return repr
 
     def set_neighbours(
@@ -35,14 +27,9 @@ class Tree:
         top: Optional[Tree],
         bottom: Optional[Tree],
         left: Optional[Tree],
-        right: Optional[Tree]
+        right: Optional[Tree],
     ):
-        self.neighbours = {
-            "top": top,
-            "bottom": bottom,
-            "left": left,
-            "right": right
-        }
+        self.neighbours = {"top": top, "bottom": bottom, "left": left, "right": right}
 
     def calc_visibility_score(self):
         for direction in self.neighbours:
@@ -58,9 +45,7 @@ class Tree:
 
 
 def main(
-    path: str,
-    input_i: Optional[int] = None,
-    input_j: Optional[int] = None
+    path: str, input_i: Optional[int] = None, input_j: Optional[int] = None
 ) -> int:
     """
     Solution to day 8 puzzle 2
@@ -72,34 +57,32 @@ def main(
     nrow = len(grid)
     ncol = len(grid[0])
     forest = {
-        (i, j): Tree(grid[i][j], (i, j))
-        for j in range(ncol)
-        for i in range(nrow)
+        (i, j): Tree(grid[i][j], (i, j)) for j in range(ncol) for i in range(nrow)
     }
 
     for position, tree in forest.items():
         i, j = position
         top = None
-        if i-1 >= 0:
-            top = forest[(i-1, j)]
+        if i - 1 >= 0:
+            top = forest[(i - 1, j)]
 
         bottom = None
-        if i+1 < nrow:
-            bottom = forest[(i+1, j)]
+        if i + 1 < nrow:
+            bottom = forest[(i + 1, j)]
 
         left = None
-        if j-1 >= 0:
-            left = forest[(i, j-1)]
+        if j - 1 >= 0:
+            left = forest[(i, j - 1)]
 
         right = None
-        if j+1 < ncol:
-            right = forest[(i, j+1)]
+        if j + 1 < ncol:
+            right = forest[(i, j + 1)]
 
         tree.set_neighbours(top, bottom, left, right)
 
     # handle tests from assignments...
     if input_i is not None and input_j is not None:
-        print(f'{input_i=}, {input_j=}')
+        print(f"{input_i=}, {input_j=}")
         tree = forest[(input_i, input_j)]
         tree.calc_visibility_score()
         score = tree.visibility_score
@@ -116,4 +99,5 @@ def main(
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])

@@ -26,9 +26,7 @@ def main(path: str) -> int:
     }
 
     who_wins = {}
-    for outcome in itertools.product(*[
-        p1_possible_outcomes, p2_possible_outcomes
-    ]):
+    for outcome in itertools.product(*[p1_possible_outcomes, p2_possible_outcomes]):
         outcome = "".join(outcome)
 
         # p1 plays rock

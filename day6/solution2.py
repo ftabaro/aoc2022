@@ -16,11 +16,11 @@ def main(path: str) -> List:
     packet_size = 14
     for signal in signals:
         siglen = len(signal)
-        for i in range(siglen-packet_size):
-            msg = signal[i:i+packet_size]
+        for i in range(siglen - packet_size):
+            msg = signal[i : i + packet_size]
             letters = set(list(msg))
             if len(letters) == packet_size:
-                res.append(i+packet_size)
+                res.append(i + packet_size)
                 break
     print(res)
     return res
@@ -28,4 +28,5 @@ def main(path: str) -> List:
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])

@@ -10,12 +10,13 @@ class Node:
     """
     A class to represent file system items
     """
+
     def __init__(
         self,
         node_name: str,
         node_type: str,
         node_parent: Optional[Node] = None,  # the root node has no parent!
-        node_size: int = 0  # folders do not have size
+        node_size: int = 0,  # folders do not have size
     ) -> None:
         self.name = node_name
         self.type = node_type
@@ -25,10 +26,10 @@ class Node:
 
     def __repr__(self):
         representation = (
-            f'Node(name={self.name}, '
-            + f'type={self.type}, '
-            + f'size={self.size}, '
-            + f'parent={self.parent})'
+            f"Node(name={self.name}, "
+            + f"type={self.type}, "
+            + f"size={self.size}, "
+            + f"parent={self.parent})"
         )
         return representation
 
@@ -41,7 +42,7 @@ class Node:
         return "".join(list(reversed(parents)))
 
 
-def parse_script(script: List[str]) -> dict[str: Node]:
+def parse_script(script: List[str]) -> dict[str:Node]:
     """
     A function to parse the input script. It detect cd and ls commands and
     builds the data structure.
@@ -49,7 +50,7 @@ def parse_script(script: List[str]) -> dict[str: Node]:
 
     i: int = 0
     wd: Node = None
-    nodes: dict[str: Node] = {}
+    nodes: dict[str:Node] = {}
     while i < len(script):
         line = script[i]
 
@@ -97,7 +98,7 @@ def main(path: str) -> int:
     with open(path, encoding="utf-8") as fin:
         script = [line.strip() for line in fin]
 
-    nodes: dict[str: Node] = parse_script(script)
+    nodes: dict[str:Node] = parse_script(script)
 
     for node in filter(lambda node: node.type == "file", nodes.values()):
         parent = node.parent
@@ -109,14 +110,15 @@ def main(path: str) -> int:
         map(
             lambda node: node.size,
             filter(
-                lambda node: node.size < 100000 and node.type == "dir",
-                nodes.values()
-            )
-        ))
+                lambda node: node.size < 100000 and node.type == "dir", nodes.values()
+            ),
+        )
+    )
     print(res)
     return res
 
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])

@@ -26,9 +26,9 @@ def main(path: str) -> int:
             tree = grid[i][j]
 
             left_trees = grid[i][:j]
-            right_trees = grid[i][j+1:]
+            right_trees = grid[i][j + 1 :]
             top_trees = list(map(lambda x: x[j], grid[:i]))
-            bottom_trees = list(map(lambda x: x[j], grid[i+1:]))
+            bottom_trees = list(map(lambda x: x[j], grid[i + 1 :]))
 
             for trees_set in [left_trees, right_trees, top_trees, bottom_trees]:
                 visible = is_visible(tree, trees_set)
@@ -42,4 +42,5 @@ def main(path: str) -> int:
 
 if __name__ == "__main__":
     import sys
+
     main(sys.argv[1])

@@ -31,16 +31,12 @@ def parse_stack_config(stack_config: List[str]) -> List[List[str]]:
     for row in stack_config:
         for match in re.finditer(pat, row):
             position_in_row = match.start(1)
-            stack = math.ceil(
-                position_in_row / number_of_chars * number_of_stacks
-            )
+            stack = math.ceil(position_in_row / number_of_chars * number_of_stacks)
             ret[stack - 1].append(match.group(1))
     return ret
 
 
-def move_stacks(
-    stack_config: List[List[str]], moves: List[str]
-) -> List[List[str]]:
+def move_stacks(stack_config: List[List[str]], moves: List[str]) -> List[List[str]]:
     """
     A function to compute the stack configuration after all the moves requested
     """

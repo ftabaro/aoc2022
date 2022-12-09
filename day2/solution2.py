@@ -86,9 +86,7 @@ def main(path: str) -> int:
     }
 
     who_wins = {}
-    for outcome in itertools.product(*[
-        p1_possible_outcomes, p2_possible_outcomes
-    ]):
+    for outcome in itertools.product(*[p1_possible_outcomes, p2_possible_outcomes]):
         outcome = "".join(outcome)
 
         # p1 plays rock
@@ -173,8 +171,8 @@ def main(path: str) -> int:
                 p2_score += tie
 
             print(
-                f"Round {i+1}: {play} - {p2_move} - {winner} -" +
-                f" p1={p1_score} - p2={p2_score}"
+                f"Round {i+1}: {play} - {p2_move} - {winner} -"
+                + f" p1={p1_score} - p2={p2_score}"
             )
 
     print(p2_score)
