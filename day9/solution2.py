@@ -30,12 +30,12 @@ class Knot:
         rep = f"Knot({self.tile=})"
         return rep
 
-    def update_tile(self, head: Knot) -> None:
+    def update_tile(self, knot: Knot) -> None:
         """
         A function to update the knot position depending on its preceding knot
         """
-        dx = head.tile.x - self.tile.x
-        dy = head.tile.y - self.tile.y
+        dx = knot.tile.x - self.tile.x
+        dy = knot.tile.y - self.tile.y
 
         if abs(dx) == 2 and dy == 0:
             newx = self.tile.x + math.copysign(1, dx)
@@ -72,7 +72,7 @@ class Head(Knot):
     def update_tile(self, direction: str) -> None:
         """
         A function to model the movement of the head of the rope or the snake.
-        Since it has no preceding knots, it can freely move of one step in each 
+        Since it has no preceding knots, it can freely move of one step in each
         direction.
         """
         x = self.tile.x
@@ -121,7 +121,7 @@ class Tail(Knot):
 
     def update_tile(self, knot: Knot) -> None:
         """
-        A function that moves the tail depending on its preceding knot and 
+        A function that moves the tail depending on its preceding knot and
         implements position memory.
         """
         Knot.update_tile(self, knot)

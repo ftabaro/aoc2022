@@ -6,6 +6,9 @@ import math
 
 
 class Tile:
+    """
+    A simple class to represent a 2D tile
+    """
     def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
@@ -16,6 +19,9 @@ class Tile:
 
 
 class Head:
+    """
+    A class to represent the head of the rope
+    """
     def __init__(self, tile: Tile) -> None:
         self.tile = tile
 
@@ -24,6 +30,9 @@ class Head:
         return rep
 
     def update_tile(self, direction: Tile) -> None:
+        """
+        A function to move the head in the given direction
+        """
         # print(f'Head - from {self.tile} to {tile}')
 
         x = self.tile.x
@@ -52,6 +61,9 @@ class Head:
 
 
 class Tail:
+    """
+    A class to represent the tail of the rope
+    """
     def __init__(self, tile: Tile) -> None:
         self.tile = tile
         self.history = set([])
@@ -62,9 +74,16 @@ class Tail:
         return rep
 
     def _update_history(self, tile: Tile) -> None:
+        """
+        A function to rememeber the visited tiles
+        """
         self.history.add((tile.x, tile.y))
 
     def update_tile(self, head: Head) -> None:
+        """
+        A function to update the position of the tail depending on the position 
+        of the head
+        """
         dx = head.tile.x - self.tile.x
         dy = head.tile.y - self.tile.y
 
