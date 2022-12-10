@@ -33,7 +33,9 @@ def main(path: str) -> int:
             line = line.strip()
             if line == "noop":
                 cycle += 1
-                emit_cycle, emit_values = test_cycle(X, cycle, emit_cycle, emit_values)
+                emit_cycle, emit_values = test_cycle(
+                    X, cycle, emit_cycle, emit_values
+                )
             elif line.startswith("addx"):
                 i = 0
                 while i < 2:

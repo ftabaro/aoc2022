@@ -5,12 +5,11 @@ Day 10 puzzle 1
 
 from typing import List
 import math
-from pprint import pprint
 
 
 def draw(
-    sprite: List[int], 
-    cycle: int, 
+    sprite: List[int],
+    cycle: int,
     crt_screen: List[List[str]]
 ) -> List[List[str]]:
     """
@@ -37,24 +36,20 @@ def main(path: str) -> str:
     with open(path, encoding="utf-8") as fin:
         for line in fin:
             line = line.strip()
-            
             sprite = [
                     X-1 if X-1 > 0 else 0,
                     X,
                     X+1 if X+1 < 39 else 39
             ]
-            
             if line == "noop":
                 cycle += 1
                 crt_screen = draw(sprite, cycle, crt_screen)
-            
             elif line.startswith("addx"):
                 i = 0
                 while i < 2:
                     cycle += 1
                     crt_screen = draw(sprite, cycle, crt_screen)
                     i += 1
-                
                 line = line.split(" ")
                 X += int(line[1])
 
