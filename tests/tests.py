@@ -37,15 +37,17 @@ from day8.solution2 import main as d8s2
 from day9.solution1 import main as d9s1
 from day9.solution2 import main as d9s2
 
+from day10.solution1 import main as d10s1
+from day10.solution2 import main as d10s2
+
 
 # Define paths to test data
 fp = pathlib.Path(__file__).resolve()
 testdata = fp.parents[0].joinpath("testdata")
+test_files = testdata.glob("*.txt")
+test_files = [p.absolute() for p in test_files]
+test_files = {p.name.replace(".txt", ""): str(p) for p in test_files}
 
-test_files = {
-    f"day{i}": str(testdata.joinpath(f"day{i}.txt")) for i in range(1, 25)
-}
-test_files["day9s2"] = str(testdata.joinpath("day9s2.txt"))
 
 ########
 # DAY1 #
@@ -183,6 +185,28 @@ def test_day9_sol2():
     solution = d9s2(test_files["day9"])
     assert solution == 1
 
+
 def test_day9_sol2_v2():
     solution = d9s2(test_files["day9s2"])
     assert solution == 36
+
+############
+## DAY 10 ##
+############
+
+
+def test_day10_sol1():
+    solution = d10s1(test_files["day10"])
+    assert solution == 13140
+
+
+def test_day10_sol2():
+    sol = """##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######....."""
+    
+    solution = d10s2(test_files["day10"])
+    assert solution == sol
