@@ -159,7 +159,6 @@ def main(path: str) -> int:
 
             while steps > 0:
                 snake.update_tile(direction)
-                # print(snake)
                 steps -= 1
 
     ret = snake.get_visited_tiles()
