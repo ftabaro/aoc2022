@@ -1,5 +1,5 @@
 """
-Day 10 puzzle 1
+Day 10 puzzle 2
 """
 
 

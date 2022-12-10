@@ -1,5 +1,5 @@
 """
-Day 9 puzzle 1
+Day 9 puzzle 2
 """
 
 from __future__ import annotations

@@ -6,6 +6,10 @@ from typing import List
 
 
 def is_visible(tree: int, tree_set: List[int]):
+    """
+    A function to test if a given tree is vibile through all the trees in a 
+    given direction
+    """
     return all(map(lambda x: x < tree, tree_set))
 
 
