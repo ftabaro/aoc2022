@@ -7,6 +7,9 @@ import math
 
 
 class Tile:
+    """
+    A simple class to represent a 2D tile
+    """
     def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
@@ -17,6 +20,9 @@ class Tile:
 
 
 class Knot:
+    """
+    A class to represent a knot or a segment of a snake or of a worm :D
+    """
     def __init__(self, tile: Tile) -> None:
         self.tile = tile
 
@@ -25,6 +31,9 @@ class Knot:
         return rep
 
     def update_tile(self, head: Knot) -> None:
+        """
+        A function to update the knot position depending on its preceding knot
+        """
         dx = head.tile.x - self.tile.x
         dy = head.tile.y - self.tile.y
 
@@ -52,15 +61,20 @@ class Knot:
 
 
 class Head(Knot):
-    def __init__(self, tile: Tile) -> None:
-        super().__init__(tile)
-
+    """
+    A special knot that represent the head of the rope or the snake. It has no
+    preceding knots.
+    """
     def __repr__(self) -> str:
         rep = f"Head({self.tile=})"
         return rep
 
     def update_tile(self, direction: str) -> None:
-
+        """
+        A function to model the movement of the head of the rope or the snake.
+        Since it has no preceding knots, it can freely move of one step in each 
+        direction.
+        """
         x = self.tile.x
         y = self.tile.y
 
@@ -87,6 +101,9 @@ class Head(Knot):
 
 
 class Tail(Knot):
+    """
+    A special knot that remembers the tiles has visited.
+    """
     def __init__(self, tile: Tile) -> None:
         super().__init__(tile)
         self.history = set([])
@@ -97,14 +114,25 @@ class Tail(Knot):
         return rep
 
     def _update_history(self, tile: Tile) -> None:
+        """
+        A function that stores a tile into the Tail memory.
+        """
         self.history.add((tile.x, tile.y))
 
     def update_tile(self, knot: Knot) -> None:
+        """
+        A function that moves the tail depending on its preceding knot and 
+        implements position memory.
+        """
         Knot.update_tile(self, knot)
         self._update_history(self.tile)
 
 
 class Snake:
+    """
+    A class that models a Snake (or a Rope). It has a fixed length of knots. 
+    The first one is always a head, the last one is always a tail. 
+    """
     def __init__(self, tile: Tile, length: int = 10) -> None:
         self.length = length - 1
         self.snake = []
@@ -134,12 +162,19 @@ class Snake:
         return rep
 
     def update_tile(self, direction: str) -> None:
+        """
+        A function to update the positions of all the knots that compose the 
+        Snake (or the Rope).
+        """
         self.head.update_tile(direction)
         self.snake[0].update_tile(self.head)
         for i in range(1, self.length):
             self.snake[i].update_tile(self.snake[i - 1])
 
     def get_visited_tiles(self):
+        """
+        A function to get how many tiles the tail has visited.
+        """
         return len(self.snake[-1:][0].history)
 
 

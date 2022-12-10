@@ -3,12 +3,12 @@ Day 10 puzzle 1
 """
 
 
-from typing import List
+from typing import List, Tuple
 
 
 def test_cycle(
     X: int, cycle: int, emit_cycle: int, emit_values: List[int]
-) -> tuple[int, List[int]]:
+) -> Tuple[int, List[int]]:
     """
     Test if the given cycle needs to emit a value. Updates next emit cycle and
     return updated emit values list.

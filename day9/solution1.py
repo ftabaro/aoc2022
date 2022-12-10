@@ -2,7 +2,6 @@
 Day 9 puzzle 1
 """
 
-from typing import List
 import math
 
 
