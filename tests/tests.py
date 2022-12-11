@@ -40,6 +40,8 @@ from day9.solution2 import main as d9s2
 from day10.solution1 import main as d10s1
 from day10.solution2 import main as d10s2
 
+from day11.solution1 import main as d11s1
+from day11.solution2 import main as d11s2
 
 # Define paths to test data
 fp = pathlib.Path(__file__).resolve()
@@ -190,6 +192,7 @@ def test_day9_sol2_v2():
     solution = d9s2(test_files["day9s2"])
     assert solution == 36
 
+
 ############
 ## DAY 10 ##
 ############
@@ -210,3 +213,18 @@ def test_day10_sol2():
     
     solution = d10s2(test_files["day10"])
     assert solution == sol
+
+
+############
+## DAY 11 ##
+############
+
+
+def test_day11_sol1():
+    solution = d11s1(test_files["day11"])
+    assert solution == 10605
+
+
+def test_day11_sol2():
+    solution = d11s2(test_files["day11"])
+    assert solution == 2713310158
